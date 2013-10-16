@@ -6,7 +6,9 @@
 		<div class="page-content">
 			<div class="input-group">
 				<input type="text" class="form-control input-group-small"
-					placeholder="Buscar..." data-bind="value: viewModelUpperNavBar.searchInput"> <span class="input-group-btn">
+					id="searchInput" placeholder="Buscar..."
+					data-bind="value: viewModelUpperNavBar.searchInput"> <span
+					class="input-group-btn">
 					<button class="btn btn-primary btn-md" type="button"
 						data-bind="click: searchButtonClick">
 						<span class="glyphicon glyphicon-search"></span>
@@ -15,9 +17,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-5" align="right">
+	<div id="userBar" class="col-md-5 search-bar-separator" align="right">
+		<div class="btn-group">
+			<button type="button" class="btn btn-primary dropdown-toggle btn-sm"
+				data-toggle="dropdown">
+				<span class="glyphicon glyphicon-user">
+				</span>  Diego  <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-menu-left-position" role="menu">
+				<li><a href="#">Cerrar Sesión</a></li>
+			</ul>
+		</div>
 	</div>
 </div>
-<script
-	src="../wikilaws/resources/javascript/wikilaws/upper-nav-bar.js"
-	type="text/javascript"></script>	
+<script src="../wikilaws/resources/javascript/wikilaws/upper-nav-bar.js"
+	type="text/javascript"></script>

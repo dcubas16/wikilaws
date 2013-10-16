@@ -99,3 +99,7 @@ body {
 .hide-tab-content{
 	display: none;
 }
+
+.dropdown-menu-left-position{
+	left: -80;
+}

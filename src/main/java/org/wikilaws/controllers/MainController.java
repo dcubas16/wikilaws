@@ -40,6 +40,22 @@ public class MainController {
 		return "resultados_busqueda";
 	}
 	
+//	@RequestMapping(value="resultados_busqueda.htm", method=RequestMethod.GET )
+//	public  resultados_busqueda(@RequestParam("searchInput") String searchInput, Model model)
+//	{
+//		if(searchInput.isEmpty()) return "resultados_busqueda";
+//		
+//		String correctSearchInput = searchInput.replace(' ', '%').toUpperCase();
+//		System.out.println("---------->CADENA DE BUSQUEDA CORRECTA"+correctSearchInput);
+//		
+//		List<LeyNorma> leyesYNormas = leyesYNormasServiceImpl.obtenerLeyesYNormasPorBuscador(correctSearchInput);
+//		
+//		model.addAttribute("leyesYNormas", leyesYNormas);
+//		model.addAttribute("searchInput", searchInput);
+//		
+//		return "resultados_busqueda";
+//	}
+	
 	@RequestMapping(value="contenido_pagina.htm", method=RequestMethod.GET )
 	public String contenido_pagina(@RequestParam("url") String url, Model model)
 	{
