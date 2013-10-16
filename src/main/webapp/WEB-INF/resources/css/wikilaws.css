@@ -1,0 +1,101 @@
+body {
+	font: 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #333333;
+	line-height: 18px;
+	background-color: #fefefe;
+	padding: 0;
+	margin: 0;
+}
+
+.input-append button.add-on {
+	height: inherit !important;
+}
+
+.without-left-side {
+	padding-left: 0px;
+}
+
+.panel-heading-according {
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.small-panel-title {
+	font-size: 14px;
+}
+
+.k-autocomplete {
+	width: 100%;
+}
+
+.main-frame {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.input-group-small {
+	height: 28px;
+}
+
+.vertical-separator {
+	height: 200px;
+}
+
+.right-separator {
+	
+}
+
+.page-content {
+	font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #333333;
+	line-height: 18px;
+}
+
+
+
+.line-separation-link {
+	line-height: 25px;
+}
+
+.search-bar-separator {
+	padding-right: 3px;
+	border-right-width: 10px;
+	padding-top: 5px;
+	padding-bottom: 25px;
+}
+
+.welcome-title-separator{
+	padding-top: 150px;
+}
+
+.according-height{
+	height:200px
+}
+
+.left-margin-content{
+	margin-left: 15px;
+}
+
+.main-page-title-margins{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+
+.search-content-line-height{
+	line-height: 30px;
+}
+
+.content-left-separator {
+	margin-left: 15px;
+	margin-right: 1px;
+}
+
+.page-content-style{
+	height: 82%;
+    overflow: auto;
+}
+
+.hide-tab-content{
+	display: none;
+}
