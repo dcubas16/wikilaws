@@ -22,19 +22,13 @@
 						<div class="row main-page-title-margins">
 							<h4>Resultados de Busqueda</h4>
 						</div>
-<!-- 						<div class="row content-left-separator search-content-line-height"> -->
-<!-- 							"src/main/webapp/WEB-INF/resources/html/DL_1017.html" -->
-<!-- 									<ul> -->
-<!-- 											<li><a href="../wikilaws/contenido_pagina.htm?url=webapp/WEB-INF/resources/html/DL_1017.html">Prueba</a></li> -->
-<!-- 									</ul> -->
-<!-- 						</div> -->
 						<div class="row content-left-separator search-content-line-height">
 							<c:choose>
 								<c:when test="${!empty leyesYNormas}">
-									<ul>
+									<ul><!-- data-bind="click: saveInNavegationHistory(${ley.url},${ley.descripcion})" --> 
 										<c:forEach items="${leyesYNormas}" var="ley">
-											<li><a href="../wikilaws/contenido_pagina.htm?url=${ley.url}" data-bind="click: saveInNavegationHistory(${ley.url},${ley.descripcion})">${ley.tipo}
-													${ley.numero_norma} ${ley.descripcion}</a></li>
+											<li><a href="../wikilaws/contenido_pagina.htm?url=${ley.url}">${ley.tipo}
+													${ley.numero_norma} ${ley.descripcion} </a></li>
 										</c:forEach>
 									</ul>
 								</c:when>
@@ -71,8 +65,7 @@
 		Tree : ko.observableArray(),
 		Cultures : ko.observableArray(),
 		MainContent : ko.observable(),
-		NavigationLine : ko.observableArray(),
-		SearchResults : ko.observableArray(ko.toJSON("${leyesYNormas}"))
+		NavigationLine : ko.observableArray()
 	};
 
 	ko.applyBindings(viewModel, $('#page-content')[0]);
@@ -80,18 +73,6 @@
 	function redirectToPage(pageUrl) {
 		window.location.replace(pageUrl);
 	}
-
-	//$(document).ready(function () {
-	var data = [ "Ley de Transporte", "Ley Penal" ];
-
-	//create AutoComplete UI component
-	$("#countries").kendoAutoComplete({
-		dataSource : data,
-		filter : "startswith",
-		placeholder : "Seleccione una ley...",
-		separator : ", "
-	});
-	//});
 </script>
 <script
 	src="../wikilaws/resources/javascript/wikilaws/upper-nav-bar.js"

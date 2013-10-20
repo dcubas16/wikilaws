@@ -51,8 +51,6 @@ body {
 	line-height: 18px;
 }
 
-
-
 .line-separation-link {
 	line-height: 25px;
 }
@@ -64,25 +62,25 @@ body {
 	padding-bottom: 25px;
 }
 
-.welcome-title-separator{
+.welcome-title-separator {
 	padding-top: 150px;
 }
 
-.according-height{
-	height:200px
+.according-height {
+	height: 200px
 }
 
-.left-margin-content{
+.left-margin-content {
 	margin-left: 15px;
 }
 
-.main-page-title-margins{
-    margin-top: 30px;
-    margin-bottom: 20px;
-    margin-left: 15px;
+.main-page-title-margins {
+	margin-top: 30px;
+	margin-bottom: 20px;
+	margin-left: 15px;
 }
 
-.search-content-line-height{
+.search-content-line-height {
 	line-height: 30px;
 }
 
@@ -91,15 +89,15 @@ body {
 	margin-right: 1px;
 }
 
-.page-content-style{
+.page-content-style {
 	height: 82%;
-    overflow: auto;
+	overflow: auto;
 }
 
-.hide-tab-content{
+.hide-tab-content {
 	display: none;
 }
 
-.dropdown-menu-left-position{
+.dropdown-menu-left-position {
 	left: -80;
 }

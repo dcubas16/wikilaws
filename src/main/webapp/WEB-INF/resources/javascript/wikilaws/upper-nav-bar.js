@@ -6,7 +6,7 @@ var viewModelUpperNavBar = {
 			if( !jQuery.isEmptyObject(viewModelUpperNavBar.searchInput()) ){
 				correctSearchinput = viewModelUpperNavBar.searchInput().toString();
 			}
-			
+			correctSearchinput = $("#searchInput").val();
 			redirectToPage("../wikilaws/resultados_busqueda.htm?searchInput=" + correctSearchinput);
 		},
         saveInNavegationHistory : function(url, descripcion){
@@ -17,18 +17,22 @@ var viewModelUpperNavBar = {
 ko.applyBindings(viewModelUpperNavBar, $('#upper-navbar')[0]);
 
 $(document).ready(function() {
-    $("#searchInput").kendoAutoComplete({
-        dataTextField: "ProductName",
-        filter: "contains",
-        minLength: 3,
+	
+	$("#searchInput").kendoAutoComplete({
+        minLength: 2,
+        ignoreCase: true,
+        template: '<a href="../wikilaws/contenido_pagina.htm?url=${data.url}">${data.tipo} ${data.numero_norma} ${data.descripcion} </a>',
         dataSource: {
-            type: "odata",
-            serverFiltering: true,
-            serverPaging: true,
-            pageSize: 20,
+        	serverFiltering: true,
             transport: {
-                read: "http://demos.kendoui.com/service/Northwind.svc/Products"
+                read:{
+                    dataType: "json",
+                    url: "../wikilaws/resultados_busqueda_ajax.htm"
+                },
+                parameterMap: function() {
+                   return { searchInput: $("#searchInput").data("kendoAutoComplete").value() };
+                }
             }
-        }
+        },
     });
 });

@@ -7,7 +7,7 @@
 			<div class="input-group">
 				<input type="text" class="form-control input-group-small"
 					id="searchInput" placeholder="Buscar..."
-					data-bind="value: viewModelUpperNavBar.searchInput"> <span
+					data-bind="value: viewModelUpperNavBar.searchInput()"> <span
 					class="input-group-btn">
 					<button class="btn btn-primary btn-md" type="button"
 						data-bind="click: searchButtonClick">
