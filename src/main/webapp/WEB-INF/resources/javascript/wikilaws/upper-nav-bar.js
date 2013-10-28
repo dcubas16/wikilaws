@@ -17,11 +17,19 @@ var viewModelUpperNavBar = {
 ko.applyBindings(viewModelUpperNavBar, $('#upper-navbar')[0]);
 
 $(document).ready(function() {
-	
+
+	function onDataBound(){
+		var autoCompleteContainerObject = $(".k-list-container").removeClass("k-reset").removeClass("k-state-border-up").css("background-color","white");
+		autoCompleteContainerObject.find("ul").addClass("autocomplete-select-item");
+	}
+
 	$("#searchInput").kendoAutoComplete({
         minLength: 2,
         ignoreCase: true,
-        template: '<a href="../wikilaws/contenido_pagina.htm?url=${data.url}">${data.tipo} ${data.numero_norma} ${data.descripcion} </a>',
+        template: '<a class="autocomplete-link-decoration" style="text-decoration: none;" href="../wikilaws/contenido_pagina.htm?url=${data.url}">'+
+        	'<div class="autocomplete-div-container" >${data.tipo} ${data.numero_norma} ${data.descripcion} '+
+        	'</div>'+
+        	'</a>',
         dataSource: {
         	serverFiltering: true,
             transport: {
@@ -34,5 +42,7 @@ $(document).ready(function() {
                 }
             }
         },
-    });
+        animation: false,
+        dataBound: onDataBound
+    }).removeClass("k-state-hover").removeClass("k-state-hover: hover");
 });

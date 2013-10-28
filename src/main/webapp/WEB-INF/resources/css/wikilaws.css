@@ -101,3 +101,40 @@ body {
 .dropdown-menu-left-position {
 	left: -80;
 }
+
+.autocomplete-link-decoration{
+	text-decoration: none;
+}
+
+.autocomplete-div-container{
+	width:100%; 
+	color:black;
+	text-decoration: none; 
+	font-size: 11;
+}
+
+.autocomplete-select-item{
+	background-color: white;
+}
+
+.autocomplete-select-item:hover{
+	background-color: #f5f5f5;
+}
+
+li.k-state-hover{
+	background-color: white;
+	background-image: none, none;
+	border-color: transparent;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+}
+
+li.k-state-hover:hover{
+	background-color: #f5f5f5;
+	background-image: none, none;
+	border-color: transparent;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+}

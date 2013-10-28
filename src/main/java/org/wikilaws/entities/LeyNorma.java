@@ -1,10 +1,15 @@
 package org.wikilaws.entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -46,7 +51,6 @@ public class LeyNorma {
 	@Column(name="url")
 	private String url;
 	
-
 	public Long getId_normas() {
 		return id_normas;
 	}
