@@ -1,24 +1,26 @@
 package org.wikilaws.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ley_normas")
-public class LeyNorma {
-	
+public class LeyNorma implements java.io.Serializable {
+	private static final long serialVersionUID = -8957481842020497160L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id_normas")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_normas", unique = true, nullable = false)
 	private Long id_normas;
 
 	@Column(name="pais")
@@ -51,6 +53,48 @@ public class LeyNorma {
 	@Column(name="url")
 	private String url;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_normas", cascade=CascadeType.ALL, targetEntity=LeyNorma.class)
+	private Set<HistorialNavegacionDeUsuario> historialNavegacionDeUsuarios = new HashSet<HistorialNavegacionDeUsuario>(0);
+	
+	public LeyNorma() {}
+	
+	public LeyNorma(String pais, String tipo,
+			String numero_norma, String descripcion, String contenido,
+			String fecha_dacion, String fecha_promulgacion,
+			String fecha_publicacion, String estado, String url) {
+		super();
+		this.pais = pais;
+		this.tipo = tipo;
+		this.numero_norma = numero_norma;
+		this.descripcion = descripcion;
+		this.contenido = contenido;
+		this.fecha_dacion = fecha_dacion;
+		this.fecha_promulgacion = fecha_promulgacion;
+		this.fecha_publicacion = fecha_publicacion;
+		this.estado = estado;
+		this.url = url;
+	}
+	
+	public LeyNorma(Long id_normas, String pais, String tipo,
+			String numero_norma, String descripcion, String contenido,
+			String fecha_dacion, String fecha_promulgacion,
+			String fecha_publicacion, String estado, String url,
+			Set<HistorialNavegacionDeUsuario> historialNavegacionDeUsuarios) {
+		super();
+		this.id_normas = id_normas;
+		this.pais = pais;
+		this.tipo = tipo;
+		this.numero_norma = numero_norma;
+		this.descripcion = descripcion;
+		this.contenido = contenido;
+		this.fecha_dacion = fecha_dacion;
+		this.fecha_promulgacion = fecha_promulgacion;
+		this.fecha_publicacion = fecha_publicacion;
+		this.estado = estado;
+		this.url = url;
+		this.historialNavegacionDeUsuarios = historialNavegacionDeUsuarios;
+	}
+
 	public Long getId_normas() {
 		return id_normas;
 	}

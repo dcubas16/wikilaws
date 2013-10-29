@@ -27,7 +27,7 @@
 								<c:when test="${!empty leyesYNormas}">
 									<ul><!-- data-bind="click: saveInNavegationHistory(${ley.url},${ley.descripcion})" --> 
 										<c:forEach items="${leyesYNormas}" var="ley">
-											<li><a href="../wikilaws/contenido_pagina.htm?url=${ley.url}">${ley.tipo}
+											<li><a href="../wikilaws/contenido_pagina.htm?url=${ley.url}&id_normas=${ley.id_normas}">${ley.tipo}
 													${ley.numero_norma} ${ley.descripcion} </a></li>
 										</c:forEach>
 									</ul>
@@ -38,13 +38,23 @@
 							</c:choose>
 						</div>
 					</div>
-					<div class="tab-pane fade active in" id="history">
-						<div class="row content-left-separator welcome-title-separator">
-							<div class="col-md-4"></div>
-							<div class="col-md-4">
-								<h2></h2>
+					<div class="tab-pane fade active" id="history" >
+						<div class="row content-left-separator welcome-title-separator" style="padding-top: 50px;">
+							<div class="col-md-12">
+								<c:choose>
+									<c:when test="${!empty historialNavegacionDeUsuario}">
+										<ul>
+											<c:forEach items="${historialNavegacionDeUsuario}" var="historialNavegacionDeUsuario">
+												<li><a href="../wikilaws/contenido_pagina.htm?url=${historialNavegacionDeUsuario.leyNorma.url}&id_normas=${historialNavegacionDeUsuario.leyNorma.id_normas}">${historialNavegacionDeUsuario.leyNorma.tipo}
+														${historialNavegacionDeUsuario.leyNorma.numero_norma} ${historialNavegacionDeUsuario.leyNorma.descripcion} ( ${historialNavegacionDeUsuario.fecha_acceso} )</a></li>
+											</c:forEach>
+										</ul>
+									</c:when>
+									<c:otherwise>
+										<h5>El usuario no presenta historial de navegación</h5>
+									</c:otherwise>
+								</c:choose>
 							</div>
-							<div class="col-md-4"></div>
 						</div>
 					</div>
 				</div>

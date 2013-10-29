@@ -1,81 +1,86 @@
 package org.wikilaws.entities;
 
 import java.util.Date;
-
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "ley_sesion_url")
-public class HistorialNavegacionDeUsuario {
+@AssociationOverrides({
+	@AssociationOverride(name = "id_normas", joinColumns = @JoinColumn(name = "id_normas")), 
+	@AssociationOverride(name = "id_usuario", joinColumns = @JoinColumn(name = "id_usuario"))})
+
+public class HistorialNavegacionDeUsuario  implements java.io.Serializable{
+	private static final long serialVersionUID = -1907823137070830985L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_ley_sesion_url")
-	private Long id_ley_sesion_url;
-	
-	@Column(name="id_normas")
-	private Long id_normas;
-	
-	@Column(name="fecha_acceso")
+	private HistorialNavegacionDeUsuarioId pk = new HistorialNavegacionDeUsuarioId();
 	private Date fecha_acceso;
 	
-	@ManyToOne
-    @JoinColumn(name="id_usuario", nullable = false)
-    private Usuario usuario;
-	
-	public HistorialNavegacionDeUsuario(Long id_ley_sesion_url, Long id_normas,
-			Date fecha_acceso, Usuario usuario) {
-		super();
-		this.id_ley_sesion_url = id_ley_sesion_url;
-		this.id_normas = id_normas;
-		this.fecha_acceso = fecha_acceso;
-		this.usuario = usuario;
-	}
-
-	public Long getId_ley_sesion_url() {
-		return id_ley_sesion_url;
-	}
-
-	public void setId_ley_sesion_url(Long id_ley_sesion_url) {
-		this.id_ley_sesion_url = id_ley_sesion_url;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Usuario get_usuario() {
-		return usuario;
-	}
-
-	public void set_usuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Long getId_normas() {
-		return id_normas;
-	}
-
-	public void setId_normas(Long id_normas) {
-		this.id_normas = id_normas;
+	public HistorialNavegacionDeUsuario(){
 	}
 	
+	@EmbeddedId
+	public HistorialNavegacionDeUsuarioId getPk() {
+		return pk;
+	}
+	
+	public void setPk(HistorialNavegacionDeUsuarioId pk) {
+		this.pk = pk;
+	}
+	
+	@Transient
+	public Usuario getUsuario(){
+		return getPk().getUsuario();
+	}
+	
+	public void setUsuario(Usuario usuario){
+		getPk().setUsuario(usuario);
+	}
+	
+	@Transient
+	public LeyNorma getLeyNorma(){
+		return getPk().getLeyNorma();
+	}
+	
+	public void setLeyNorma(LeyNorma leyNorma){
+		getPk().setLeyNorma(leyNorma);
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_acceso", nullable = false)
 	public Date getFecha_acceso() {
 		return fecha_acceso;
 	}
-
+	
 	public void setFecha_acceso(Date fecha_acceso) {
 		this.fecha_acceso = fecha_acceso;
 	}
+	
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		HistorialNavegacionDeUsuario that = (HistorialNavegacionDeUsuario) o;
+
+		if (getPk() != null ? !getPk().equals(that.getPk())
+				: that.getPk() != null)
+			return false;
+
+		return true;
+	}
+
+	public int hashCode() {
+		return (getPk() != null ? getPk().hashCode() : 0);
+	}
+	
 }

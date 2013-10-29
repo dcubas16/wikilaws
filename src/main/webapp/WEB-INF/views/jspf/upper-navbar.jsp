@@ -22,7 +22,7 @@
 			<button type="button" class="btn btn-primary dropdown-toggle btn-sm"
 				data-toggle="dropdown">
 				<span class="glyphicon glyphicon-user">
-				</span>  Diego  <span class="caret"></span>
+				</span>  Erwin  <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu dropdown-menu-left-position" role="menu">
 				<li><a href="#">Cerrar Sesión</a></li>

@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.wikilaws.entities.HistorialNavegacionDeUsuario;
 import org.wikilaws.entities.LeyNorma;
 import org.wikilaws.services.LeyesYNormasServiceImpl;
+import org.wikilaws.services.UserNavigationHistoryServiceImpl;
 
 @Controller
 @RequestMapping("/")
@@ -19,9 +21,21 @@ public class MainController {
 	@Autowired
 	private LeyesYNormasServiceImpl leyesYNormasServiceImpl;
 	
+	@Autowired
+	private UserNavigationHistoryServiceImpl userNavigationHistoryServiceImpl;
+	
+	@RequestMapping(value="login.htm", method=RequestMethod.GET )
+	public String login(Model model)
+	{
+		return "login";
+	}
+	
 	@RequestMapping(value="home.htm", method=RequestMethod.GET )
 	public String home(Model model)
 	{
+		List<HistorialNavegacionDeUsuario> historialNavegacionDeUsuario = userNavigationHistoryServiceImpl.obtenerHistorialNavegacionDeUsuario(Long.parseLong("1"));
+		model.addAttribute("historialNavegacionDeUsuario", historialNavegacionDeUsuario);
+		
 		return "home";
 	}
 	
@@ -37,16 +51,22 @@ public class MainController {
 		
 		model.addAttribute("leyesYNormas", leyesYNormas);
 		model.addAttribute("searchInput", searchInput);
+		List<HistorialNavegacionDeUsuario> historialNavegacionDeUsuario = userNavigationHistoryServiceImpl.obtenerHistorialNavegacionDeUsuario(Long.parseLong("1"));
+		model.addAttribute("historialNavegacionDeUsuario", historialNavegacionDeUsuario);
+		
 		
 		return "resultados_busqueda";
 	}
 	
 	@RequestMapping(value="contenido_pagina.htm", method=RequestMethod.GET )
-	public String contenido_pagina(@RequestParam("url") String url, Model model)
+	public String contenido_pagina(@RequestParam("url") String url, @RequestParam("id_normas") String id_normas, Model model)
 	{
 		if(url.isEmpty()) return "resultados_busqueda";
-
+		
 		model.addAttribute("url", url);
+		model.addAttribute("id_normas", id_normas);
+		List<HistorialNavegacionDeUsuario> historialNavegacionDeUsuario = userNavigationHistoryServiceImpl.obtenerHistorialNavegacionDeUsuario(Long.parseLong("1"));
+		model.addAttribute("historialNavegacionDeUsuario", historialNavegacionDeUsuario);
 		
 		return "contenido_pagina";
 	}

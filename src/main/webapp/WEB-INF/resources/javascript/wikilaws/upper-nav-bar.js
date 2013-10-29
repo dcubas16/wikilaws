@@ -26,7 +26,7 @@ $(document).ready(function() {
 	$("#searchInput").kendoAutoComplete({
         minLength: 2,
         ignoreCase: true,
-        template: '<a class="autocomplete-link-decoration" style="text-decoration: none;" href="../wikilaws/contenido_pagina.htm?url=${data.url}">'+
+        template: '<a class="autocomplete-link-decoration" style="text-decoration: none;" href="../wikilaws/contenido_pagina.htm?url=${data.url}&id_normas=${data.id_normas}">'+
         	'<div class="autocomplete-div-container" >${data.tipo} ${data.numero_norma} ${data.descripcion} '+
         	'</div>'+
         	'</a>',

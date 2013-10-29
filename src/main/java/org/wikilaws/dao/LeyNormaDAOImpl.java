@@ -1,13 +1,10 @@
 package org.wikilaws.dao;
 
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 import org.wikilaws.entities.HistorialNavegacionDeUsuario;
 import org.wikilaws.entities.LeyNorma;
 import org.wikilaws.entities.Usuario;
@@ -16,6 +13,7 @@ import org.hibernate.Session;
 public class LeyNormaDAOImpl extends HibernateDaoSupport implements
 		LeyNormaDAO {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<LeyNorma> obtenerLeyesYNormas() {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
@@ -25,6 +23,7 @@ public class LeyNormaDAOImpl extends HibernateDaoSupport implements
 		return leyesYNormas;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<LeyNorma> obtenerLeyesYNormasPorBuscador(String criterioBusqueda) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
@@ -39,17 +38,30 @@ public class LeyNormaDAOImpl extends HibernateDaoSupport implements
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		
-		HistorialNavegacionDeUsuario historialNavegacionDeUsuario = 
-				new HistorialNavegacionDeUsuario(Long.parseLong("1"), Long.parseLong("1"), fechaAcceso, usuario);
-		session.save(usuario);
+		HistorialNavegacionDeUsuario historialNavegacionDeUsuario = new HistorialNavegacionDeUsuario();
 		
-		Set<HistorialNavegacionDeUsuario> historialNavegacionDeUsuarios = new HashSet<HistorialNavegacionDeUsuario>(); 
-		historialNavegacionDeUsuarios.add(historialNavegacionDeUsuario);
+		historialNavegacionDeUsuario.setFecha_acceso(fechaAcceso);
+		historialNavegacionDeUsuario.setLeyNorma(leyNorma);
+		historialNavegacionDeUsuario.setUsuario(usuario);
 		
-		usuario.setHistorialNavegacionDeUsuarios(historialNavegacionDeUsuarios);
+		usuario.getHistorialNavegacionDeUsuarios().add(historialNavegacionDeUsuario);
+		
+		session.save(historialNavegacionDeUsuario);
+		
 		session.getTransaction().commit();
-		session.close();
 
 		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<HistorialNavegacionDeUsuario> obtenerHistorialNavegacionDeUsuario(
+			Long id_usuario) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<HistorialNavegacionDeUsuario> historialNavegacionDeUsuario = session.createQuery("from HistorialNavegacionDeUsuario").list();
+		
+		session.close();
+		return historialNavegacionDeUsuario;
 	}
 }

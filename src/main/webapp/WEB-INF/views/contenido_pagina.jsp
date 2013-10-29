@@ -15,7 +15,7 @@
 			<div class="row botton-separator">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#home" data-toggle="tab">Contenidos</a></li>
-					<li><a href="#history" data-toggle="tab">Historial</a></li>
+					<li><a href="#history" data-toggle="tab" >Historial</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
 					<div class="tab-pane fade active in" id="home">
@@ -25,13 +25,23 @@
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane fade active" id="history">
-						<div class="row content-left-separator welcome-title-separator hide-tab-content">
-							<div class="col-md-4"></div>
-							<div class="col-md-4">
-								<h2></h2>
+					<div class="tab-pane fade active" id="history" >
+						<div class="row content-left-separator welcome-title-separator" style="padding-top: 50px;">
+							<div class="col-md-12">
+								<c:choose>
+									<c:when test="${!empty historialNavegacionDeUsuario}">
+										<ul>
+											<c:forEach items="${historialNavegacionDeUsuario}" var="historialNavegacionDeUsuario">
+												<li><a href="../wikilaws/contenido_pagina.htm?url=${historialNavegacionDeUsuario.leyNorma.url}&id_normas=${historialNavegacionDeUsuario.leyNorma.id_normas}">${historialNavegacionDeUsuario.leyNorma.tipo}
+														${historialNavegacionDeUsuario.leyNorma.numero_norma} ${historialNavegacionDeUsuario.leyNorma.descripcion} ( ${historialNavegacionDeUsuario.fecha_acceso} )</a></li>
+											</c:forEach>
+										</ul>
+									</c:when>
+									<c:otherwise>
+										<h5>El usuario no presenta historial de navegación</h5>
+									</c:otherwise>
+								</c:choose>
 							</div>
-							<div class="col-md-4"></div>
 						</div>
 					</div>
 				</div>
@@ -62,23 +72,27 @@
 		$.get( "${url}", function( data ) {
 			  $( "#page-content" ).html(data);
 			});
+		
+		$.ajax({
+			type: "GET",
+			url: "../wikilaws/UserNavigationHistory/registrar_navegacion_usuario.htm",
+			data: { id_usuario: 1, id_normas: "${id_normas}" }
+		})
+		.done(function( msg ) {
+// 			alert( "Data Saved: " + msg );
+		});	
 	});
+	
+// 	function obtenerHistorialUsuario(pageUrl) {
+// 		var data = /* Your data in JSON format - see below */;
+// 		$.getJSON("../wikilaws/UserNavigationHistory/obtener_historial_navegacion_usuario.htm?id_usuario=1", data, function(returnedData) {  
+// 		})
+// 	}
 	
 	function redirectToPage(pageUrl) {
 		window.location.replace(pageUrl);
 	}
 
-	//$(document).ready(function () {
-	var data = [ "Ley de Transporte", "Ley Penal" ];
-
-	//create AutoComplete UI component
-	$("#countries").kendoAutoComplete({
-		dataSource : data,
-		filter : "startswith",
-		placeholder : "Seleccione una ley...",
-		separator : ", "
-	});
-	//});
 </script>
 <style>
 @font-face {

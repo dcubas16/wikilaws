@@ -1,4 +1,8 @@
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@	taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <div class="col-md-3 right-separator">
 	<div class="col-md-12" style="padding-left: 0px;" align="center">
 		<a href="../wikilaws/home.htm"> 
@@ -18,17 +22,34 @@
 				<div class="panel-body according-height">
 					<div class="row">
 						<div class="col-md-12">
-							<ul class="list-unstyled">
-								<li><a href="#">LEY 29873 CONTRATACIONES DEL ESTADO</a></li>
-								<li><a href="#">DL 1017 APRUEBA LEY DE CONTRATACIONES
-										DEL ESTADO</a></li>
-							</ul>
+ 							<c:set var="count" value="0" scope="page" />
+							<c:choose>
+									<c:when test="${!empty historialNavegacionDeUsuario}">
+										<ul class="list-unstyled">
+											<c:forEach items="${historialNavegacionDeUsuario}" var="historialNavegacionDeUsuario">
+												<c:if test="${count < 4}">
+													<li><a href="../wikilaws/contenido_pagina.htm?url=${historialNavegacionDeUsuario.leyNorma.url}&id_normas=${historialNavegacionDeUsuario.leyNorma.id_normas}">${historialNavegacionDeUsuario.leyNorma.tipo}
+															${historialNavegacionDeUsuario.leyNorma.numero_norma} ${historialNavegacionDeUsuario.leyNorma.descripcion} ( ${historialNavegacionDeUsuario.fecha_acceso} )</a></li>
+													<c:set var="count" value="${count + 1}" scope="page"/>
+												</c:if>
+											</c:forEach>
+										</ul>
+									</c:when>
+									<c:otherwise>
+										<h5>El usuario no presenta historial de navegación</h5>
+									</c:otherwise>
+								</c:choose>
+<!-- 							<ul class="list-unstyled"> -->
+<!-- 								<li><a href="#">LEY 29873 CONTRATACIONES DEL ESTADO</a></li> -->
+<!-- 								<li><a href="#">DL 1017 APRUEBA LEY DE CONTRATACIONES -->
+<!-- 										DEL ESTADO</a></li> -->
+<!-- 							</ul> -->
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-4"></div>
-						<div class="col-md-4"><a href="#">...Ver m�s</a></div>
+						<div class="col-md-4"><a href="#">...Ver más</a></div>
 					</div>
 
 				</div>
