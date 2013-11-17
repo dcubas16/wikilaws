@@ -1,0 +1,21 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http auto-config="true">
+        <form-login login-page="/login.htm" default-target-url="/login.htm" authentication-failure-url="/login.htm" />
+        <logout logout-success-url="/login.htm" />
+        <intercept-url pattern="/wikilaws/*" access="ROLE_USER,ROLE_ADMIN" />
+    </http>
+
+    <beans:bean id="userDetailService" class="org.wikilaws.security.UserDetailServiceImpl" />
+
+    <authentication-manager>
+        <authentication-provider user-service-ref="userDetailService">
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>

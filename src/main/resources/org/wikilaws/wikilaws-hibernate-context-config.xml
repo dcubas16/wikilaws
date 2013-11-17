@@ -34,6 +34,18 @@
 		class="org.wikilaws.dao.LeyNormaDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="RoleDAO"
+		class="org.wikilaws.dao.RoleDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="UserDAO"
+		class="org.wikilaws.dao.UserDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="AnotacionDAO"
+		class="org.wikilaws.dao.AnotacionDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />

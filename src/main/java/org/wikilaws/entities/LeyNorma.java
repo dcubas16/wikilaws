@@ -19,7 +19,7 @@ public class LeyNorma implements java.io.Serializable {
 	private static final long serialVersionUID = -8957481842020497160L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name="id_normas", unique = true, nullable = false)
 	private Long id_normas;
 
@@ -53,8 +53,11 @@ public class LeyNorma implements java.io.Serializable {
 	@Column(name="url")
 	private String url;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_normas", cascade=CascadeType.ALL, targetEntity=LeyNorma.class)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "id_normas", cascade=CascadeType.ALL, targetEntity=LeyNorma.class)
 	private Set<HistorialNavegacionDeUsuario> historialNavegacionDeUsuarios = new HashSet<HistorialNavegacionDeUsuario>(0);
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_normas", cascade=CascadeType.ALL, targetEntity=LeyNorma.class)
+	private Set<Nota> notas = new HashSet<Nota>(0);
 	
 	public LeyNorma() {}
 	
@@ -79,7 +82,8 @@ public class LeyNorma implements java.io.Serializable {
 			String numero_norma, String descripcion, String contenido,
 			String fecha_dacion, String fecha_promulgacion,
 			String fecha_publicacion, String estado, String url,
-			Set<HistorialNavegacionDeUsuario> historialNavegacionDeUsuarios) {
+			Set<HistorialNavegacionDeUsuario> historialNavegacionDeUsuarios,
+			Set<Nota> notas) {
 		super();
 		this.id_normas = id_normas;
 		this.pais = pais;
@@ -93,6 +97,24 @@ public class LeyNorma implements java.io.Serializable {
 		this.estado = estado;
 		this.url = url;
 		this.historialNavegacionDeUsuarios = historialNavegacionDeUsuarios;
+		this.notas = notas;
+	}
+
+	public Set<HistorialNavegacionDeUsuario> getHistorialNavegacionDeUsuarios() {
+		return historialNavegacionDeUsuarios;
+	}
+
+	public void setHistorialNavegacionDeUsuarios(
+			Set<HistorialNavegacionDeUsuario> historialNavegacionDeUsuarios) {
+		this.historialNavegacionDeUsuarios = historialNavegacionDeUsuarios;
+	}
+
+	public Set<Nota> getNotas() {
+		return notas;
+	}
+
+	public void setNotas(Set<Nota> notas) {
+		this.notas = notas;
 	}
 
 	public Long getId_normas() {

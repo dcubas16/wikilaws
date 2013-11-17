@@ -134,3 +134,13 @@ li.k-state-hover:hover{
 	-webkit-border-radius: 0px;
 	border-radius: 0px;
 }
+
+ul.nav-tabs li a{
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 9px;
+    padding-left: 9px;	
+}
+
+
+

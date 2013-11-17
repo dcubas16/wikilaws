@@ -8,23 +8,39 @@
 <c:import url="../views/jspf/resources.jsp" />
 </head>
 <body>
-	<c:url value="/login.htm" var="loginUrl"/>
 	<div class="row main-frame">
 		<c:import url="../views/jspf/left-navbar.jsp" />
 		<div class="col-md-9 botton-separator">
 			<c:import url="../views/jspf/upper-navbar.jsp" />
 			<div class="row botton-separator">
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#home" data-toggle="tab">Contenidos</a></li>
+					<li class="active"><a href="#history" data-toggle="tab">Historial</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
-					<div class="tab-pane fade active in" id="home">
-						<div class="row content-left-separator welcome-title-separator">
-							<div class="col-md-3"></div>
-							<div class="col-md-5">
-								<h2>Login</h2>
+					<div class="tab-pane fade active in" id="history">
+						<div class="row content-left-separator search-content-line-height">
+							<div class="col-md-12 page-content-style"">
+								<c:choose>
+									<c:when test="${!empty historialNavegacionDeUsuario}">
+										<ul class="list-unstyled">
+											<c:forEach items="${historialNavegacionDeUsuario}"
+												var="historialNavegacionDeUsuario">
+												<li><a
+													href="../wikilaws/contenido_pagina.htm?url=${historialNavegacionDeUsuario.leyNorma.url}&id_normas=${historialNavegacionDeUsuario.leyNorma.id_normas}">
+														<span>
+															${historialNavegacionDeUsuario.leyNorma.tipo}
+															${historialNavegacionDeUsuario.leyNorma.numero_norma}
+															${historialNavegacionDeUsuario.leyNorma.descripcion} (
+															${historialNavegacionDeUsuario.fecha_acceso} ) </span>
+												</a></li>
+											</c:forEach>
+										</ul>
+									</c:when>
+									<c:otherwise>
+										<h5>El usuario no presenta historial de navegación</h5>
+									</c:otherwise>
+								</c:choose>
 							</div>
-							<div class="col-md-4"></div>
 						</div>
 					</div>
 				</div>
@@ -45,9 +61,7 @@
 		Tree : ko.observableArray(),
 		Cultures : ko.observableArray(),
 		MainContent : ko.observable(),
-		NavigationLine : ko.observableArray(),
-		SearchResults : ko.observableArray(ko.toJSON("${leyesYNormas}")),
-
+		NavigationLine : ko.observableArray()
 	};
 
 	ko.applyBindings(viewModel, $('#page-content')[0]);
@@ -56,6 +70,8 @@
 		window.location.replace(pageUrl);
 	}
 </script>
+<script src="../wikilaws/resources/javascript/wikilaws/upper-nav-bar.js"
+	type="text/javascript"></script>
 <style>
 @font-face {
 	font-family: 'Glyphicons Halflings';

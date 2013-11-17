@@ -25,6 +25,7 @@
 				</span>  Erwin  <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu dropdown-menu-left-position" role="menu">
+				<li><a href="../wikilaws/historial_navegacion.htm">Historial</a></li>
 				<li><a href="#">Cerrar Sesión</a></li>
 			</ul>
 		</div>

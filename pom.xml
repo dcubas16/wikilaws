@@ -9,17 +9,11 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
 		<spring.core.version>3.1.0.RELEASE</spring.core.version>
 		<spring.data.jpa.version>1.0.0.RELEASE</spring.data.jpa.version>
-
 		<spring.security.core.version>3.1.1.RELEASE</spring.security.core.version>
-
-
 		<cglib.version>2.2</cglib.version>
 		<aspectj.version>1.6.10</aspectj.version>
-
-<!-- 		<mysql.connector.version>5.1.16</mysql.connector.version> -->
 		<hibernate.entitymanager.version>3.6.3.Final</hibernate.entitymanager.version>
 		<hibernate.jpa-api.version>2.0-cr-1</hibernate.jpa-api.version>
 		<c3p0.version>0.9.1.2</c3p0.version>
@@ -27,15 +21,12 @@
 		<querydsl.version>2.2.5</querydsl.version>
 		<slf4j.version>1.6.1</slf4j.version>
 		<log4j.version>1.2.14</log4j.version>
-
 		<javax.servlet-api.version>2.5</javax.servlet-api.version>
 		<javax.jstl-taglibs.version>1.1.2</javax.jstl-taglibs.version>
 		<jackson.version>1.9.3</jackson.version>
-
 		<!-- Testing -->
 		<mockito.version>1.8.5</mockito.version>
 		<junit.version>4.8.2</junit.version>
-
 		<!-- Plugins -->
 		<maven.copy.plugin.version>0.2.3</maven.copy.plugin.version>
 		<maven.compiler.plugin.version>2.3.2</maven.compiler.plugin.version>

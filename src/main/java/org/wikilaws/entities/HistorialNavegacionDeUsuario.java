@@ -17,7 +17,6 @@ import javax.persistence.Transient;
 @AssociationOverrides({
 	@AssociationOverride(name = "id_normas", joinColumns = @JoinColumn(name = "id_normas")), 
 	@AssociationOverride(name = "id_usuario", joinColumns = @JoinColumn(name = "id_usuario"))})
-
 public class HistorialNavegacionDeUsuario  implements java.io.Serializable{
 	private static final long serialVersionUID = -1907823137070830985L;
 	

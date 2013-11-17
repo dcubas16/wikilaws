@@ -14,31 +14,61 @@
 			<c:import url="../views/jspf/upper-navbar.jsp" />
 			<div class="row botton-separator">
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#home" data-toggle="tab">Contenidos</a></li>
-					<li><a href="#history" data-toggle="tab" >Historial</a></li>
+					<li class="active"><a href="#contenido" data-toggle="tab">Contenidos</a></li>
+					<li class=""><a href="#historial" data-toggle="tab">Historial</a></li>
+					<li class=""><a href="#notas" data-toggle="tab">Notas</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
-					<div class="tab-pane fade active in" id="home">
+					<div class="tab-pane fade active in" id="contenido">
 						<div class="row content-left-separator search-content-line-height">
-							<div id="page-content" class="col-md-12 page-content-style" >
-							
+							<div id="page-content" class="col-md-12 page-content-style">
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane fade active" id="history" >
-						<div class="row content-left-separator welcome-title-separator" style="padding-top: 50px;">
-							<div class="col-md-12">
+					<div class="tab-pane fade" id="historial">
+						<div class="row content-left-separator search-content-line-height">
+							<div class="col-md-12 page-content-style"">
 								<c:choose>
 									<c:when test="${!empty historialNavegacionDeUsuario}">
-										<ul>
-											<c:forEach items="${historialNavegacionDeUsuario}" var="historialNavegacionDeUsuario">
-												<li><a href="../wikilaws/contenido_pagina.htm?url=${historialNavegacionDeUsuario.leyNorma.url}&id_normas=${historialNavegacionDeUsuario.leyNorma.id_normas}">${historialNavegacionDeUsuario.leyNorma.tipo}
-														${historialNavegacionDeUsuario.leyNorma.numero_norma} ${historialNavegacionDeUsuario.leyNorma.descripcion} ( ${historialNavegacionDeUsuario.fecha_acceso} )</a></li>
+										<ul class="list-unstyled">
+											<c:forEach items="${historialNavegacionDeUsuario}"
+												var="historialNavegacionDeUsuario">
+												<li><a
+													href="../wikilaws/contenido_pagina.htm?url=${historialNavegacionDeUsuario.leyNorma.url}&id_normas=${historialNavegacionDeUsuario.leyNorma.id_normas}">
+														<span>
+															${historialNavegacionDeUsuario.leyNorma.tipo}
+															${historialNavegacionDeUsuario.leyNorma.numero_norma}
+															${historialNavegacionDeUsuario.leyNorma.descripcion} (
+															${historialNavegacionDeUsuario.fecha_acceso} ) </span>
+												</a></li>
 											</c:forEach>
 										</ul>
 									</c:when>
 									<c:otherwise>
 										<h5>El usuario no presenta historial de navegación</h5>
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="notas">
+						<div class="row content-left-separator search-content-line-height">
+							<div class="col-md-12 page-content-style"">
+								<c:choose>
+									<c:when test="${!empty notas}">
+										<ul class="list-unstyled">
+											<c:forEach items="${notas}" var="notas">
+												<li><a
+													href="#">
+														<span>
+															${notas.textoLey}
+															( ${notas.leyNorma.tipo} ${notas.leyNorma.numero_norma} ) </span>
+												</a></li>
+											</c:forEach>
+										</ul>
+									</c:when>
+									<c:otherwise>
+										<h5>El usuario no tiene anotaciones para esta ley</h5>
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -50,49 +80,106 @@
 	</div>
 </body>
 <script>
-	var leyNorma = function(tipo, numero_norma, descripcion) {
-		tipo = ko.observable(tipo);
-		numero_norma = ko.observable(numero_norma);
-		descripcion = ko.observable(descripcion);
-	};
+	$(function() {
+		var leyNorma = function(tipo, numero_norma, descripcion) {
+			tipo = ko.observable(tipo);
+			numero_norma = ko.observable(numero_norma);
+			descripcion = ko.observable(descripcion);
+		};
 
-	var viewModel = {
-		LeftMenu : ko.observableArray(),
-		MenuTabs : ko.observableArray(),
-		Tree : ko.observableArray(),
-		Cultures : ko.observableArray(),
-		MainContent : ko.observable(),
-		NavigationLine : ko.observableArray(),
-		SearchResults : ko.observableArray()
-	};
+		var viewModel = {
+			LeftMenu : ko.observableArray(),
+			MenuTabs : ko.observableArray(),
+			Tree : ko.observableArray(),
+			Cultures : ko.observableArray(),
+			MainContent : ko.observable(),
+			NavigationLine : ko.observableArray(),
+			SearchResults : ko.observableArray()
+		};
 
-	ko.applyBindings(viewModel, $('#page-content')[0]);
-	
-	$(document).ready(function() { 
-		$.get( "${url}", function( data ) {
-			  $( "#page-content" ).html(data);
-			});
+		var leftSectionViewModel = {
+			Notas : ko.observableArray(),
+			agregarNota: function(nota, idNormas){
+				this.Notas.push({ textoSeleccionado : nota, idNormas : 1 })
+			}
+		};
+
+		ko.applyBindings(viewModel, $('#page-content')[0]);
+		ko.applyBindings(leftSectionViewModel, $('.right-separator')[0]);
+
+		$.contextMenu({
+			selector : '.page-content-style',
+			callback : function(key, options) {
+				var m = "clicked: " + key;
+				var element = ".page-content-style";
+				switch(key){
+					case "agregarANotasDeLey": agregarNota(element);
+					case "copiar": copiarTexto(element);
+				}
+			},
+			items : {
+				"agregarANotasDeLey" : {
+					name : "Agregar a Notas"
+				},
+				"copiar" : {
+					name : "Copiar"
+				}
+			}
+		});
 		
-		$.ajax({
-			type: "GET",
-			url: "../wikilaws/UserNavigationHistory/registrar_navegacion_usuario.htm",
-			data: { id_usuario: 1, id_normas: "${id_normas}" }
-		})
-		.done(function( msg ) {
-// 			alert( "Data Saved: " + msg );
-		});	
+		function copiarTexto(objectClass) {
+		    var notaSeleccionada = selectHTML();
+		}
+		
+		function agregarNota(objectClass) {
+		    var notaSeleccionada = selectHTML();
+		    var textoSeleccionado;
+		    if(notaSeleccionada.anchorNode == undefined)
+			  	{
+			    	textoSeleccionado = notaSeleccionada;
+			  	}
+		    else
+		    	{
+		    		textoSeleccionado = notaSeleccionada.anchorNode.textContent;
+		    	}
+		    $.ajax(
+					{
+						type : "GET",
+						url : "../wikilaws/UserNavigationHistory/registrar_anotacion_ley.htm",
+						data : {
+							id_normas : "${id_normas}",
+							textoley : textoSeleccionado
+						}
+					}).done(function(msg) {});
+		    
+		    leftSectionViewModel.agregarNota(notaSeleccionada, 1);
+		    location.reload();
+		}
 	});
-	
-// 	function obtenerHistorialUsuario(pageUrl) {
-// 		var data = /* Your data in JSON format - see below */;
-// 		$.getJSON("../wikilaws/UserNavigationHistory/obtener_historial_navegacion_usuario.htm?id_usuario=1", data, function(returnedData) {  
-// 		})
-// 	}
-	
+
+	$(document)
+			.ready(
+					function() {
+						$.get("${url}", function(data) {
+							$("#page-content").html(data);
+						});
+
+						$.ajax(
+										{
+											type : "GET",
+											url : "../wikilaws/UserNavigationHistory/registrar_navegacion_usuario.htm",
+											data : {
+												id_usuario : 1,
+												id_normas : "${id_normas}"
+											}
+										}).done(function(msg) {
+									// 			alert( "Data Saved: " + msg );
+								});
+					});
+
 	function redirectToPage(pageUrl) {
 		window.location.replace(pageUrl);
 	}
-
 </script>
 <style>
 @font-face {

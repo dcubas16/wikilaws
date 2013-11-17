@@ -15,43 +15,27 @@
 			<div class="row botton-separator">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#home" data-toggle="tab">Contenidos</a></li>
-					<li><a href="#history" data-toggle="tab">Historial</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
 					<div class="tab-pane fade active in" id="home">
-						<div class="row main-page-title-margins">
-							<h4>Resultados de Busqueda</h4>
-						</div>
 						<div class="row content-left-separator search-content-line-height">
-							<c:choose>
-								<c:when test="${!empty leyesYNormas}">
-									<ul><!-- data-bind="click: saveInNavegationHistory(${ley.url},${ley.descripcion})" --> 
-										<c:forEach items="${leyesYNormas}" var="ley">
-											<li><a href="../wikilaws/contenido_pagina.htm?url=${ley.url}&id_normas=${ley.id_normas}">${ley.tipo}
-													${ley.numero_norma} ${ley.descripcion} </a></li>
-										</c:forEach>
-									</ul>
-								</c:when>
-								<c:otherwise>
-									<h5>Debe ingresar algún criterio de busqueda</h5>
-								</c:otherwise>
-							</c:choose>
-						</div>
-					</div>
-					<div class="tab-pane fade active" id="history" >
-						<div class="row content-left-separator welcome-title-separator" style="padding-top: 50px;">
-							<div class="col-md-12">
+							<div id="page-content" class="col-md-12 page-content-style">
+								<div class="row main-page-title-margins">
+									<h4>Resultados de Busqueda</h4>
+								</div>
 								<c:choose>
-									<c:when test="${!empty historialNavegacionDeUsuario}">
+									<c:when test="${!empty leyesYNormas}">
 										<ul>
-											<c:forEach items="${historialNavegacionDeUsuario}" var="historialNavegacionDeUsuario">
-												<li><a href="../wikilaws/contenido_pagina.htm?url=${historialNavegacionDeUsuario.leyNorma.url}&id_normas=${historialNavegacionDeUsuario.leyNorma.id_normas}">${historialNavegacionDeUsuario.leyNorma.tipo}
-														${historialNavegacionDeUsuario.leyNorma.numero_norma} ${historialNavegacionDeUsuario.leyNorma.descripcion} ( ${historialNavegacionDeUsuario.fecha_acceso} )</a></li>
+											<!-- data-bind="click: saveInNavegationHistory(${ley.url},${ley.descripcion})" -->
+											<c:forEach items="${leyesYNormas}" var="ley">
+												<li><a
+													href="../wikilaws/contenido_pagina.htm?url=${ley.url}&id_normas=${ley.id_normas}">${ley.tipo}
+														${ley.numero_norma} ${ley.descripcion} </a></li>
 											</c:forEach>
 										</ul>
 									</c:when>
 									<c:otherwise>
-										<h5>El usuario no presenta historial de navegación</h5>
+										<h5>Debe ingresar algún criterio de busqueda</h5>
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -84,8 +68,7 @@
 		window.location.replace(pageUrl);
 	}
 </script>
-<script
-	src="../wikilaws/resources/javascript/wikilaws/upper-nav-bar.js"
+<script src="../wikilaws/resources/javascript/wikilaws/upper-nav-bar.js"
 	type="text/javascript"></script>
 <style>
 @font-face {

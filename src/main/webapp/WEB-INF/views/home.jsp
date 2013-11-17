@@ -15,7 +15,6 @@
 			<div class="row botton-separator">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#home" data-toggle="tab">Contenidos</a></li>
-					<li><a href="#history" data-toggle="tab">Historial</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
 					<div class="tab-pane fade active in" id="home">
@@ -26,32 +25,6 @@
 							</div>
 							<div class="col-md-4"></div>
 						</div>
-						<div class="row">
-							<ul class="list-unstyled">
-								<c:forEach items="${leyesYNormas}" var="ley">
-									<li><a href="${ley.url}">${ley.tipo} ${ley.numero_norma} ${ley.descripcion}</a></li>
-								</c:forEach>
-							</ul>
-						</div>
-					</div>
-					<div class="tab-pane fade active" id="history" >
-						<div class="row content-left-separator welcome-title-separator" style="padding-top: 50px;">
-							<div class="col-md-12">
-								<c:choose>
-									<c:when test="${!empty historialNavegacionDeUsuario}">
-										<ul>
-											<c:forEach items="${historialNavegacionDeUsuario}" var="historialNavegacionDeUsuario">
-												<li><a href="../wikilaws/contenido_pagina.htm?url=${historialNavegacionDeUsuario.leyNorma.url}&id_normas=${historialNavegacionDeUsuario.leyNorma.id_normas}">${historialNavegacionDeUsuario.leyNorma.tipo}
-														${historialNavegacionDeUsuario.leyNorma.numero_norma} ${historialNavegacionDeUsuario.leyNorma.descripcion} ( ${historialNavegacionDeUsuario.fecha_acceso} )</a></li>
-											</c:forEach>
-										</ul>
-									</c:when>
-									<c:otherwise>
-										<h5>El usuario no presenta historial de navegación</h5>
-									</c:otherwise>
-								</c:choose>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -59,40 +32,26 @@
 	</div>
 </body>
 <script>
-	var leyNorma = function(tipo, numero_norma, descripcion){
-		tipo = ko.observable(tipo);
-		numero_norma = ko.observable(numero_norma); 
-		descripcion = ko.observable(descripcion);
-	};
+// 	var leyNorma = function(tipo, numero_norma, descripcion) {
+// 		tipo = ko.observable(tipo);
+// 		numero_norma = ko.observable(numero_norma);
+// 		descripcion = ko.observable(descripcion);
+// 	};
 
-	var viewModel = {
-		LeftMenu : ko.observableArray(),
-		MenuTabs : ko.observableArray(),
-		Tree : ko.observableArray(),
-		Cultures : ko.observableArray(),
-		MainContent : ko.observable(),
-		NavigationLine : ko.observableArray(),
-		SearchResults: ko.observableArray(ko.toJSON("${leyesYNormas}")),
+// 	var viewModel = {
+// 		LeftMenu : ko.observableArray(),
+// 		MenuTabs : ko.observableArray(),
+// 		Tree : ko.observableArray(),
+// 		Cultures : ko.observableArray(),
+// 		MainContent : ko.observable(),
+// 		NavigationLine : ko.observableArray()
+// 	};
 
-	};
-	
-	ko.applyBindings(viewModel, $('#page-content')[0]);
+// 	ko.applyBindings(viewModel, $('#page-content')[0]);
 
 	function redirectToPage(pageUrl) {
 		window.location.replace(pageUrl);
 	}
-
-	//$(document).ready(function () {
-	var data = [ "Ley de Transporte", "Ley Penal" ];
-
-	//create AutoComplete UI component
-	$("#countries").kendoAutoComplete({
-		dataSource : data,
-		filter : "startswith",
-		placeholder : "Seleccione una ley...",
-		separator : ", "
-	});
-	//});
 </script>
 <style>
 @font-face {

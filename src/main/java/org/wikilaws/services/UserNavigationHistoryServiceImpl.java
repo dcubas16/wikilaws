@@ -2,10 +2,8 @@ package org.wikilaws.services;
 
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.wikilaws.dao.LeyNormaDAO;
 import org.wikilaws.entities.HistorialNavegacionDeUsuario;
 import org.wikilaws.entities.LeyNorma;
@@ -30,7 +28,6 @@ public class UserNavigationHistoryServiceImpl implements
 
 	@Override
 	public List<HistorialNavegacionDeUsuario> obtenerHistorialNavegacionDeUsuario(Long id_usuario) {
-		// TODO Auto-generated method stub
 		return leyNormaDAO.obtenerHistorialNavegacionDeUsuario(id_usuario);
 	}
 
