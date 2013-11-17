@@ -40,6 +40,8 @@ public class MainController {
 	{
 		List<HistorialNavegacionDeUsuario> historialNavegacionDeUsuario = userNavigationHistoryServiceImpl.obtenerHistorialNavegacionDeUsuario(Long.parseLong("1"));
 		model.addAttribute("historialNavegacionDeUsuario", historialNavegacionDeUsuario);
+		List<Nota> notas = anotacionesServiceImpl.obtenerAnotacionesPorLey((long) 2);
+		model.addAttribute("notas", notas);
 		
 		return "home";
 	}
@@ -67,6 +69,8 @@ public class MainController {
 		model.addAttribute("searchInput", searchInput);
 		List<HistorialNavegacionDeUsuario> historialNavegacionDeUsuario = userNavigationHistoryServiceImpl.obtenerHistorialNavegacionDeUsuario(Long.parseLong("1"));
 		model.addAttribute("historialNavegacionDeUsuario", historialNavegacionDeUsuario);
+		List<Nota> notas = anotacionesServiceImpl.obtenerAnotacionesPorLey((long) 2);
+		model.addAttribute("notas", notas);
 		
 		
 		return "resultados_busqueda";

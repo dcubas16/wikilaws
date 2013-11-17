@@ -30,7 +30,9 @@
 											<c:forEach items="${leyesYNormas}" var="ley">
 												<li><a
 													href="../wikilaws/contenido_pagina.htm?url=${ley.url}&id_normas=${ley.id_normas}">${ley.tipo}
-														${ley.numero_norma} ${ley.descripcion} </a></li>
+														${ley.numero_norma} ${ley.descripcion} 
+													</a><a href="../wikilaws/${ley.pdf}">   (Descargar Pdf)</a>
+												</li>		
 											</c:forEach>
 										</ul>
 									</c:when>
