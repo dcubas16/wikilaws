@@ -17,7 +17,8 @@ public class AnotacionDAOImpl extends HibernateDaoSupport implements AnotacionDA
 	public List<Nota> obtenerAnotacionesPorLey(Long id_normas) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		List<Nota> notas = session.createQuery("from Nota where leynorma_id_normas = "+id_normas).list();
+		List<Nota> notas = session.createQuery("from Nota").list();
+		//List<Nota> notas = session.createQuery("from Nota where leynorma_id_normas = "+id_normas).list();
 		session.close();
 		return notas;
 	}

@@ -40,6 +40,7 @@
 															${historialNavegacionDeUsuario.leyNorma.numero_norma}
 															${historialNavegacionDeUsuario.leyNorma.descripcion} (
 															${historialNavegacionDeUsuario.fecha_acceso} ) </span>
+															
 												</a></li>
 											</c:forEach>
 										</ul>
@@ -114,7 +115,13 @@
 				var element = ".page-content-style";
 				switch(key){
 					case "agregarANotasDeLey": agregarNota(element);
+					break;
 					case "copiar": copiarTexto(element);
+					break;
+					case "imprimir": imprimirTexto(element);
+					break;
+					case "descargar": descargarPdf(element);
+					break;
 				}
 			},
 			items : {
@@ -123,12 +130,33 @@
 				},
 				"copiar" : {
 					name : "Copiar"
+				},
+				"imprimir" : {
+					name : "Imprimir"
+				},
+				"descargar" : {
+					name : "Descargar Pdf"
 				}
 			}
 		});
 		
 		function copiarTexto(objectClass) {
-		    var notaSeleccionada = selectHTML();
+		    var textoSelec = selectHTML();
+		    window.prompt ("Copy to clipboard: Ctrl+C, Enter", textoSelec);
+		}
+		
+		function imprimirTexto(objectClass) {
+		    var textoSel = selectHTML();
+		    var ventimp = window.open(' ', 'popimpr');
+		    ventimp.document.write(textoSel);
+		    ventimp.document.close();
+		    ventimp.print();
+		    ventimp.close();
+		}
+		
+		function descargarPdf(objectClass) {
+			var id_normas = "${id_normas}";
+			document.location.href ="../wikilaws/resources/archivos/"+id_normas+".zip";
 		}
 		
 		function agregarNota(objectClass) {

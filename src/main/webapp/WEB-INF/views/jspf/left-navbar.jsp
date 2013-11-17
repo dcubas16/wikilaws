@@ -31,7 +31,8 @@
 											<c:if test="${count < 4}">
 												<li><a
 													href="../wikilaws/contenido_pagina.htm?url=${historialNavegacionDeUsuario.leyNorma.url}&id_normas=${historialNavegacionDeUsuario.leyNorma.id_normas}">
-														<span>${historialNavegacionDeUsuario.leyNorma.tipo} ${historialNavegacionDeUsuario.leyNorma.numero_norma} ${historialNavegacionDeUsuario.leyNorma.descripcion} (${historialNavegacionDeUsuario.fecha_acceso} ) </span>
+														<!-- <span>${historialNavegacionDeUsuario.leyNorma.tipo} ${historialNavegacionDeUsuario.leyNorma.numero_norma} ${historialNavegacionDeUsuario.leyNorma.descripcion} (${historialNavegacionDeUsuario.fecha_acceso} ) </span> -->
+														<span>${historialNavegacionDeUsuario.leyNorma.tipo} ${historialNavegacionDeUsuario.leyNorma.numero_norma} (${historialNavegacionDeUsuario.fecha_acceso} ) </span>
 												</a></li>
 												<c:set var="count" value="${count + 1}" scope="page" />
 											</c:if>

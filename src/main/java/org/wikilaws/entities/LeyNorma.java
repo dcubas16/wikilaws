@@ -53,6 +53,9 @@ public class LeyNorma implements java.io.Serializable {
 	@Column(name="url")
 	private String url;
 	
+	@Column(name="pdf")
+	private String pdf;
+	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "id_normas", cascade=CascadeType.ALL, targetEntity=LeyNorma.class)
 	private Set<HistorialNavegacionDeUsuario> historialNavegacionDeUsuarios = new HashSet<HistorialNavegacionDeUsuario>(0);
 	
@@ -64,7 +67,7 @@ public class LeyNorma implements java.io.Serializable {
 	public LeyNorma(String pais, String tipo,
 			String numero_norma, String descripcion, String contenido,
 			String fecha_dacion, String fecha_promulgacion,
-			String fecha_publicacion, String estado, String url) {
+			String fecha_publicacion, String estado, String url, String pdf) {
 		super();
 		this.pais = pais;
 		this.tipo = tipo;
@@ -76,6 +79,7 @@ public class LeyNorma implements java.io.Serializable {
 		this.fecha_publicacion = fecha_publicacion;
 		this.estado = estado;
 		this.url = url;
+		this.pdf = pdf;
 	}
 	
 	public LeyNorma(Long id_normas, String pais, String tipo,
@@ -83,7 +87,8 @@ public class LeyNorma implements java.io.Serializable {
 			String fecha_dacion, String fecha_promulgacion,
 			String fecha_publicacion, String estado, String url,
 			Set<HistorialNavegacionDeUsuario> historialNavegacionDeUsuarios,
-			Set<Nota> notas) {
+			Set<Nota> notas,
+			String pdf) {
 		super();
 		this.id_normas = id_normas;
 		this.pais = pais;
@@ -98,6 +103,7 @@ public class LeyNorma implements java.io.Serializable {
 		this.url = url;
 		this.historialNavegacionDeUsuarios = historialNavegacionDeUsuarios;
 		this.notas = notas;
+		this.pdf = pdf;
 	}
 
 	public Set<HistorialNavegacionDeUsuario> getHistorialNavegacionDeUsuarios() {
@@ -203,5 +209,13 @@ public class LeyNorma implements java.io.Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public String getPdf() {
+		return pdf;
+	}
+
+	public void setPdf(String pdf) {
+		this.pdf = pdf;
 	}
 }
