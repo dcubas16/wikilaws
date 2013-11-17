@@ -2,7 +2,6 @@ package org.wikilaws.dao;
 
 import java.util.List;
 
-import org.wikilaws.entities.LeyNorma;
 import org.wikilaws.entities.Nota;
 
 public interface AnotacionDAO {

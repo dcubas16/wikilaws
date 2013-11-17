@@ -1,13 +1,9 @@
 package org.wikilaws.dao;
 
-import java.io.Console;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-import org.wikilaws.entities.HistorialNavegacionDeUsuario;
 import org.wikilaws.entities.LeyNorma;
 import org.wikilaws.entities.Nota;
 
@@ -17,6 +13,7 @@ public class AnotacionDAOImpl extends HibernateDaoSupport implements AnotacionDA
 	public List<Nota> obtenerAnotacionesPorLey(Long id_normas) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
+		@SuppressWarnings("unchecked")
 		List<Nota> notas = session.createQuery("from Nota where leynorma_id_normas = "+id_normas).list();
 		session.close();
 		return notas;

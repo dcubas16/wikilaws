@@ -1,7 +1,6 @@
 package org.wikilaws.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,10 +33,10 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		// convert model user to spring security user
 		String username = userEntity.getLogin();
 		String password = userEntity.getPassword();
-		boolean enabled = true;
-		boolean accountNonExpired = true;
-		boolean credentialsNonExpired = true;
-		boolean accountNonLocked = true;
+//		boolean enabled = true;
+//		boolean accountNonExpired = true;
+//		boolean credentialsNonExpired = true;
+//		boolean accountNonLocked = true;
 
 		User springUser = new User(username, password);
 		return springUser;

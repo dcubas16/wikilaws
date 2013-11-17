@@ -2,9 +2,7 @@ package org.wikilaws.dao;
 
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-import org.springframework.stereotype.Repository;
 import org.wikilaws.entities.HistorialNavegacionDeUsuario;
 import org.wikilaws.entities.LeyNorma;
 import org.wikilaws.entities.Usuario;

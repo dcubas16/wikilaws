@@ -1,11 +1,9 @@
 package org.wikilaws.services;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wikilaws.dao.AnotacionDAO;
-import org.wikilaws.entities.LeyNorma;
 import org.wikilaws.entities.Nota;
 
 @Service
